@@ -31,7 +31,7 @@ for dane in dane_pracownikow:
     imie = dane.split(' ')[0]
     wyplata = int(dane.split(' ')[1])
     pracownik = Pracownik(imie,wyplata)
-    
+    print(pracownik)
     laczny_koszt+=pracownik.koszt_koncowy()
 
 
