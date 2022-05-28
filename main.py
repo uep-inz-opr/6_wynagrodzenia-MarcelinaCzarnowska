@@ -1,38 +1,21 @@
-liczba_pracownikow = int(input())
-
-
 class Pracownik:
-    def __init__(self,imie,wyplata_brutto):
-        
-        self.imie = imie
-        self.wyplata_brutto = wyplata_brutto
-        self.wyplata = round(self.wyplata_brutto - self.skladka - self.ubezpieczenie - self.podatek,2)
-        self.skladka = round(self.wyplata_brutto*0.0976,2) + round(self.wyplata_brutto*0.015,2) + round(self.wyplata_brutto*0.0245,2)
-        self.podatek = round((round((round(self.wyplata_brutto-111.25 - self.skladka,2))*0.18,2)-46.33) - round((round(self.wyplata_brutto-self.skladka,2))*0.0775,2),0)
-        self.ubezpieczenie = round((self.wyplata_brutto - self.skladka)*0.09,2)
-        self.koszt_pracodawcy = round(self.wyplata_brutto*0.0976,2) + round(self.wyplata_brutto*0.065,2) + round(self.wyplata_brutto*0.0193,2) + round(self.wynagrodzenie_brutto*0.0245,2) + round(self.wynagrodzenie_brutto*0.001,2)
-
-    def __repr__(self):
-        #return "{} {}".format{self.imie:.2f}..
-        return f"{self.imie} {self.wyplata:.2f} {self.koszt_pracodawcy:.2f} {self.wyplata_brutto+self.koszt_pracodawcy:.2f}"
+    def __init__(self, imie, wynagrodzenie):
+        self.imie = str(imie)
+        self.wynagrodzenie = int(wynagrodzenie)
     
-    def koszt_koncowy(self):
-        return self.wyplata_brutto + self.koszt_pracodawcy
-
-
-dane_pracownikow = []
-laczny_koszt = 0
-
-for pracownik in range(liczba_pracownikow):
-    dane_wejscowe = input()
-    dane_pracownikow.append(dane_wejscowe)
-
-for dane in dane_pracownikow:
-    imie = dane.split(' ')[0]
-    wyplata = int(dane.split(' ')[1])
-    pracownik = Pracownik(imie,wyplata)
-    print(pracownik)
-    laczny_koszt+=pracownik.koszt_koncowy()
-
-
-print(f"{laczny_koszt:.2f}")
+    def __repr__(self):
+        return f"{self.imie} {self.wynagrodzenie}"
+    
+    def __wynagrodzenie_netto__(self):
+       a = round(round(self.wynagrodzenie * 0.0976,2) + round(self.wynagrodzenie * 0.015,2) + round(self.wynagrodzenie * 0.0245,2), 2)
+       b = round(self.wynagrodzenie-a,2)
+       c = round(b*0.09, 2)
+       e = round(b*0.0775, 2)
+       f = round(111.25, 2)
+       g = round(self.wynagrodzenie - f - a, 2)
+       h = round(g, 0)
+       i = round(((h)*0.18)-46.33,2)
+       j = round(i-e, 2)
+       k = round(j, 0)
+       self.wynagrodzenienetto = round((self.wynagrodzenie - a - c - k), 2)
+       return round(self.wynagrodzenienetto, 2)
