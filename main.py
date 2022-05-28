@@ -29,3 +29,22 @@ class Pracownik:
         return self.koszt
     def __razem__(self):
         return round(self.wynagrodzenie + self.__obliczanie_skladki__(),2)      
+
+        wszyscy_pracownicy = int(input())
+pracownicy = []
+for n in range(wszyscy_pracownicy):
+    imie_wynagrodzenie = input().split()
+    imie = imie_wynagrodzenie[0]
+    wynagrodzenie = imie_wynagrodzenie[1]
+    pracownik_obj = Pracownik(imie, wynagrodzenie)
+    pracownicy.append(pracownik_obj)
+
+laczny_koszt_pracodawcy = 0 
+
+for m in range(wszyscy_pracownicy):
+    laczny_koszt_pracodawcy += pracownicy[m].__razem__()
+    imie = pracownicy[m].imie
+    wynagrodzenie = pracownicy[m].wynagrodzenie
+    print(imie, f"{pracownicy[m].__wynagrodzenie_netto__():.2f}", f"{pracownicy[m].__obliczanie_skladki__():.2f}", f"{pracownicy[m].__koszt__():.2f}")
+
+print(laczny_koszt_pracodawcy)
