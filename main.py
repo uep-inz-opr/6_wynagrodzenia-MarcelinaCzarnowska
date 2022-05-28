@@ -19,3 +19,13 @@ class Pracownik:
        k = round(j, 0)
        self.wynagrodzenienetto = round((self.wynagrodzenie - a - c - k), 2)
        return round(self.wynagrodzenienetto, 2)
+
+       def __obliczanie_skladki__(self):
+        self.skladki = round(self.wynagrodzenie *0.0976, 2) + round(self.wynagrodzenie*0.065, 2) + round(self.wynagrodzenie*0.0193,2) + round(self.wynagrodzenie*0.0245,2) + round(self.wynagrodzenie*0.001,2)
+        return round(self.skladki,2)
+
+    def __koszt__(self):
+        self.koszt = round(self.wynagrodzenie + self.skladki, 2)
+        return self.koszt
+    def __razem__(self):
+        return round(self.wynagrodzenie + self.__obliczanie_skladki__(),2)      
